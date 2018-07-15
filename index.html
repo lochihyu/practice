@@ -1,0 +1,163 @@
+<html>
+    <head>
+        <style>
+        /* *{
+             border:2px solid black;
+             } */
+
+        .showresult{
+            height: 200px;
+            text-align: center;
+            padding-bottom: 30px;
+         }
+
+        #card{
+            width: 100%;
+            display:flex;
+        }
+
+        #cardtriger{
+            flex:70px;
+        }
+
+        #geneHit {
+            flex:2;
+            float: right;
+            padding-left: 30px;
+        }
+
+        #userHit{
+            flex:2;
+            float: right;
+        }
+
+        #result{
+            color: rgb(216, 4, 50);
+            font-weight: 100;
+            font-size: 20;
+            text-align: center;
+        }
+        button{
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+        }
+
+        
+        </style>
+   </head>
+   <body>
+       
+        <div class="showresult">
+            <h1>Paper Scissor Stone!!!</h1>
+             <P id="userWinCount"></P>
+                <p id="geneWinCount"></p>
+                <p id="result"></p>
+        </div>
+
+         <div id="card"> 
+            <div id="cardtriger">
+                <button onclick="game('scissor')">Scissor</button>
+                <button onclick="game('rock')">Rock</button>
+                <button onclick="game('paper')">Paper</button>
+                
+                <div id="userHit">
+                        <p>User</p>
+                </div>
+                
+                <div id="geneHit">
+                        <p>Gene</p>
+                </div>
+            </div>
+            
+        </div>
+
+     <script>
+            let userWinCount = 0
+            let geneWinCount = 0
+            // 放在function 外才不會重新計算
+            
+            function game(hit){
+                if (hit=='scissor'){
+                    // put img tag in order to show photo 
+                    document.getElementById('userHit').innerHTML='<img src="https://static.thenounproject.com/png/88666-200.png"/></img>'+'You'
+                    }else if(hit=='rock'){
+                    document.getElementById('userHit').innerHTML='<img src="https://static.thenounproject.com/png/1793856-200.png"/></img>'+'You'
+                    }else{
+                    document.getElementById('userHit').innerHTML='<img src="https://static.thenounproject.com/png/88664-200.png"/></img>'+'You'
+                    }
+                
+                //  console.log(hit)
+                 let randomNumber = Math.random()
+                //  空字串可以不用打三次重複的程式碼（documant get.....)
+                 let geneHit =''
+                 let result=''
+                if(randomNumber<1/3){
+                    // console.log('gene:','scissor')
+                    geneHit ='scissor'
+                    document.getElementById('geneHit').innerHTML='<img src="https://static.thenounproject.com/png/88666-200.png"/></img>'+'Gene'
+                    if(hit=='scissor'){
+                        result='everyone'
+                    }else if(hit=='rock'){
+                        result='you'
+                        userWinCount= userWinCount+1
+                    }else{
+                        result='Gene'
+                        geneWinCount= geneWinCount+1
+                    }
+
+                     }else if(randomNumber <2/3){
+                    // console.log('gene','rock')
+                    geneHit ='rock'
+                    document.getElementById('geneHit').innerHTML='<img src="https://static.thenounproject.com/png/1793856-200.png"/></img>'+'Gene'
+                    if(hit=='scissor'){
+                        result='Gene'
+                        geneWinCount= geneWinCount+1
+                    }else if(hit=='rock'){
+                        result='every one'
+                    }else{
+                        result='you'
+                        userWinCount= userWinCount+1
+                    }
+
+                    }else {
+                    // console.log('gene','paper')
+                    geneHit ='paper'
+                    document.getElementById('geneHit').innerHTML='<img src="https://static.thenounproject.com/png/88664-200.png"/></img>'+'Gene'
+                    if(hit=='scissor'){
+                        result='you'
+                        userWinCount= userWinCount+1
+                    }else if(hit=='rock'){
+                        result='Gene'
+                        geneWinCount= geneWinCount+1
+                    }else{
+                        result='every one'
+                    }
+                }
+
+
+                   document.getElementById('result').innerHTML = 'Gene is '+geneHit+' ,you\'re '+hit+' and winer goes to '+result
+                // document.getElementById('userWinCount').innerHTML='You win'+userWinCount
+                // document.getElementById('geneWinCount').innerHTML='Gene wins'+geneWinCount
+                // 順序調換顯示方式不同 若要alert 前出現次數
+                   if(userWinCount>=5){
+                        setTimeout(function(){   
+                            alert('Omg! You win!')
+                            userWinCount=0
+                            geneWinCount=0
+                            },200)
+                    }
+                   if(geneWinCount>=5){
+                        setTimeout(function(){   
+                            alert('Gene win!')
+                            geneWinCount=0
+                            userWinCount=0
+                            },200)
+                    }
+                   document.getElementById('userWinCount').innerHTML='You win'+userWinCount
+                   document.getElementById('geneWinCount').innerHTML='Gene wins'+geneWinCount
+            }
+
+        </script>
+    </body>
+</html>
